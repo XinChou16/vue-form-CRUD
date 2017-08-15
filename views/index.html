@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue+MongoDB+Node.js实现表单增删查改</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" >
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+<div id="form">
+    <div class="container" >
+        <div class="row table">
+            <div class="col-md-8 text-left center" >
+                <table class="table table-bordered" >
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>性別</th>
+                            <th>年龄</th>
+                            <th>学校</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="info">
+                        <tr v-for="(item,index) in list">
+                            <td>{{item.name}}</td>
+                            <td>{{item.sex}}</td>
+                            <td>{{item.age}}</td>
+                            <td>{{item.school}}</td>
+                            <td>
+                                <a href="#" v-on:click="modify(index)" >修改</a>
+                                <a href="#" v-on:click="del(index)" >删除</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" v-on:click="addNew" class="btn btn-info">新增</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modals" v-if="isAdd">
+        <div class="mask">
+        </div>
+        <div class="m-wrap">
+            <div class="row">
+                <div class="col-md-2 text-left">
+                    姓名：
+                </div>
+                <div class="col-md-10">
+                    <input v-model="name" class="form-control" placeholder="姓名" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-left">
+                    性别：
+                </div>
+                <div class="col-md-10">
+                    <input v-model="sex" class="form-control" placeholder="性别" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-left">
+                    年龄：
+                </div>
+                <div class="col-md-10">
+                    <input v-model="age" class="form-control" placeholder="年龄" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 text-left">
+                    学校
+                </div>
+                <div class="col-md-10">
+                    <input v-model="school" class="form-control" placeholder="学校" >           
+                    <button type="button" v-on:click="cancel" class="btn btn-info fr">取消</button>
+                    <button type="button" v-on:click="confirm" v-if="conAdd" class="btn btn-info fr">确认</button>
+                    <button type="button" v-on:click="modConfirm" v-else class="btn btn-info fr">确认</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/vue.js"></script>
+<script src="./js/vue-resource.js"></script>
+<script src="./js/index.js"></script>
+</body>
+</html>
